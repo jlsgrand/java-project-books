@@ -70,6 +70,7 @@ public class BookFile {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()));
 
+            wordList.add(null);
             String line;
             do {
                 line = reader.readLine();
@@ -87,10 +88,28 @@ public class BookFile {
 
             } while (line != null);
 
+            wordList.add(null);
             wordList.sort(new Comparator<Word>() {
+                /**
+                 * Compares the word regarding descending count number (and if equal, word content comparison in ascending order).
+                 *
+                 * @param o1 word 1
+                 * @param o2 word 2
+                 * @return comparison result
+                 *          level 1 ==> 0 if both words are null; 1 if o1 is null but not o2; -1 if o2 is null but not o1
+                 *          level 2 ==> 1 if o1.count < o2.count; -1 if o1.count > o2.count
+                 *          level 3 ==> o1.content.compareTo(o2.content) (alphabetical ascending ordering)
+                 */
                 @Override
                 public int compare(Word o1, Word o2) {
                     int comparison = 0;
+
+                    // If both words are null then they are equal
+                    if (o1 == null && o2 == null) return 0;
+                    // Else if word 1 is null (but not word 2), it should be greater compared to word 2
+                    else if (o1 == null) return 1;
+                    // Else if word 2 is null, it should go
+                    else if (o2 == null) return -1;
 
                     // If counts are different, compare them
                     // Otherwise compare word contents
