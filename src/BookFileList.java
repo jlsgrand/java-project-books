@@ -58,7 +58,7 @@ public class BookFileList {
      * @param bookFileIndex the book file index in the book file list.
      */
     public void chooseReferenceFile(int bookFileIndex) {
-        if (bookFileIndex < bookFileList.size() && bookFileIndex >= 0) {
+        if (bookFileIndex <= bookFileList.size() && bookFileIndex > 0) {
             referenceBookFile = bookFileList.get(bookFileIndex - 1);
         } else {
             referenceBookFile = null;

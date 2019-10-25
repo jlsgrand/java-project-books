@@ -208,7 +208,7 @@ public class Main {
      * @return true if file exists, false otherwise
      */
     private static boolean checkBookFilePath(String bookFilePath) {
-        return Files.exists(Path.of(bookFilePath));
+        return bookFilePath.length() > 0 && Files.exists(Path.of(bookFilePath));
     }
 
     /**
